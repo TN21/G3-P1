@@ -1,19 +1,25 @@
 #include "evaluator.h"
 #include <string>
+#include <iostream>
 
-using std::string;
+using namespace std;
 
-Evaluator::Evaluator() {
+Evaluator::Evaluator(void) {
     
 }
 
 int Evaluator::evaluate(string & rawExpression) {
-    
+    return 0;
 }
-bool Evaluator::isOperator(char c)
+bool Evaluator::isOperator(char token)
 {
-	if (c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == '!' || c == '+' || c == '-' || c == '^' || c == '*' || c == '/' || c == '%' || c == '>' || c == '<' || c == '=' || c == '&' || c == '|')
-		return true;
+	
+	const char operatorTokens[] = "(){}[]!+-^*/%><=&|";
+	const int OPERATOR_TOKEN_COUNT = strlen(operatorTokens);
+	for(int i = 0; i < OPERATOR_TOKEN_COUNT; i++) {
+		if(token == operatorTokens[i])
+			return true;
+	}
 	return false;
 }
 string Evaluator::addSpaces(string expression)
