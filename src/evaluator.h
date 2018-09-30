@@ -4,11 +4,12 @@
 using std::string;
 class Evaluator {
     private:
-	    bool isOperator(char c);
+        bool isOperator(char c);
         bool precedenceCompare(string op1, string op2);
         string addSpaces(string expresion);
     public:
-        Evaluator();
+        Evaluator(void);
         int evaluate(string & rawExpression);
+
 };
 #endif
