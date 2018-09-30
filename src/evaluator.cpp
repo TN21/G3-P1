@@ -72,3 +72,23 @@ string Evaluator::addSpaces(string expression)
 	}
 	return spaced_expression;
 }
+bool Evaluator::precedence_compare(string op1, string op2) // returns false if the op2 has higher precedence and true otherwise
+{
+	string precedence[9] = { "( { [ ] } ) ","! ++ -- ", "^ ", "* / % ", "+ - ", "> >= < <= ", "== != ", "&& ", "|| " }; //array of precedences
+	op1 += " "; //spaces added to differentiate between operators such as ++ and +
+	op2 += " "; 
+	int op1_prec;
+	int op2_prec;
+	for (op1_prec = 0; op1_prec < 9; ++op1_prec) //if the string is in the element it breaks with that being the precedence
+	{
+		if (precedence[op1_prec].find(op1) != string::npos)
+			break;
+	}
+	for (op2_prec = 0; op2_prec < 9; ++op2_prec)
+	{
+		if (precedence[op2_prec].find(op2) != string::npos)
+			break;
+	}
+	if (op2_prec < op1_prec) //the lower the number the higher the precedence
+		return false;
+	return true;
