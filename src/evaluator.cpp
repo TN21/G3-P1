@@ -10,12 +10,18 @@ Evaluator::Evaluator() {
 int Evaluator::evaluate(string & rawExpression) {
     
 }
+bool Evaluator::isOperator(char c)
+{
+	if (c == '(' || c == ')' || c == '{' || c == '}' || c == '[' || c == ']' || c == '!' || c == '+' || c == '-' || c == '^' || c == '*' || c == '/' || c == '%' || c == '>' || c == '<' || c == '=' || c == '&' || c == '|')
+		return true;
+	return false;
+}
 string Evaluator::addSpaces(string expression)
 {
 	char current_char;
 	string spaced_expression = "";
 	string previous_type = "None";
-	for (int i = 0;i < expression.length();++i) //iterate over entire string
+	for (unsigned int i = 0;i < expression.length();++i) //iterate over entire string
 	{
 		current_char = expression[i];
 		if (isdigit(current_char)) //GETTING THE FULL NUMBER
@@ -72,11 +78,11 @@ string Evaluator::addSpaces(string expression)
 	}
 	return spaced_expression;
 }
-bool Evaluator::precedence_compare(string op1, string op2) // returns false if the op2 has higher precedence and true otherwise
+bool Evaluator::precedenceCompare(string op1, string op2) // returns false if the op2 has higher precedence and true otherwise
 {
 	string precedence[9] = { "( { [ ] } ) ","! ++ -- ", "^ ", "* / % ", "+ - ", "> >= < <= ", "== != ", "&& ", "|| " }; //array of precedences
 	op1 += " "; //spaces added to differentiate between operators such as ++ and +
-	op2 += " "; 
+	op2 += " ";
 	int op1_prec;
 	int op2_prec;
 	for (op1_prec = 0; op1_prec < 9; ++op1_prec) //if the string is in the element it breaks with that being the precedence
@@ -92,3 +98,4 @@ bool Evaluator::precedence_compare(string op1, string op2) // returns false if t
 	if (op2_prec < op1_prec) //the lower the number the higher the precedence
 		return false;
 	return true;
+}
